@@ -4,92 +4,145 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <title>Portfolio Tracker</title>
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+            table {
+                border-collapse: collapse;
+                width: 100%;
             }
 
-            .full-height {
-                height: 100vh;
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
             }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
+            tr:hover {
+                background-color:#f5f5f5
             }
         </style>
     </head>
+
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+        <!--Portfolio-->
+        <table>
+            <tr>
+                <td>Currency</td>
+                <td>Balance</td>
+            </tr>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+            <tr>
+                <td>Bitcoin (BTC)</td>
+                <td><input type="text" id="btc"></td>
+            </tr>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
+            <tr>
+                <td>Ethereum (ETH)</td>
+                <td><input type="text" id="eth"></td>
+            </tr>
+
+            <tr>
+                <td>Litecoin (LTC)</td>
+                <td><input type="text" id="ltc"></td>
+            </tr>
+
+            <tr>
+                <td>Ripple (XRP)</td>
+                <td><input type="text" id="xrp"></td>
+            </tr>
+
+            <tr>
+                <td>NEM (XEM)</td>
+                <td><input type="text" id="xem"></td>
+            </tr>
+
+            <tr>
+                <td>Dash </td>
+                <td><input type="text" id="dash"></td>
+            </tr>
+
+            <tr>
+                <td>Iota (MIOTA)</td>
+                <td><input type="text" id="miota"></td>
+            </tr>
+
+            <tr>
+                <td>Stratis (STRAT)</td>
+                <td><input type="text" id="strat"></td>
+            </tr>
+
+            <tr>
+                <td>EOS</td>
+                <td><input type="text" id="eos"></td>
+            </tr>
+
+            <tr>
+                <td>Steem</td>
+                <td><input type="text" id="steem"></td>
+            </tr>
+
+        </table>
+
+        <br/>
+
+        <input id="getROI" type="submit" style="width:25%" value="24hour ROI">
+
+        <!--Portfolio Return-->
+        <br/>
+        <br/>
+
+        <div id="percentDifference"></div>
+
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#getROI").click(function(e) {
+                e.preventDefault();
+
+                //AJAX call for % diff of front(portfolio) - history(portfolio)
+                $.ajax({
+                    type: "POST",
+                    url: "/api/portfolioROI",
+                    data: {
+                        "BTC" : $("#btc").val(),
+                        "ETH" : $("#eth").val(),
+                        "LTC" : $("#ltc").val(),
+                        "XRP" : $("#xrp").val(),
+                        "XEM" : $("#xem").val(),
+                        "DASH" : $("#dash").val(),
+                        "MIOTA" : $("#miota").val(),
+                        "STRAT" : $("#strat").val(),
+                        "EOS" : $("#eos").val(),
+                        "STEEM" : $("#steem").val()
+                    },
+                    success: function(data,status) {
+                        //Populate Portfolio Return div
+
+                        //Probably have to watch for floating point error
+                        //Not a big enough deal to fret about right now
+                        $("#percentDifference").text((Math.round(data * 100) / 100)+"%");
+                        if(data > 0) {
+                            $("#percentDifference").css('color','green');
+                        } else {
+                            $("#percentDifference").css('color','red');
+                        }
+                    },
+                    error: function(exception) {
+                        //alert(exception);
+                    },
+                    dataType: 'json',
+                    encode: true
+                });
+            });
+        </script>
     </body>
 </html>
