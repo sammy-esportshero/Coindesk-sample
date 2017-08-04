@@ -99,6 +99,6 @@ class CoinCapController extends Controller
         $historicalValue = $this->getHistoricalPortfolioValue($portfolio);
 
         //return % diff
-        return (1 - ($currentValue/$historicalValue))*100;
+        return (($currentValue-$historicalValue)/$historicalValue)*100;
     }
 }
