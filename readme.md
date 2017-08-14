@@ -1,52 +1,31 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 # Coindesk-sample
+EDIT (08/14/2017): This was a task assigned to me for an interview with CoinDesk. It is currently live on : https://secret-castle-77072.herokuapp.com/
+
+Develop a "portfolio tracker" that shows return % for any given cryptocurrency portfolio over the past 24 hours.
+
+The web frontend should allow a user to enter their portfolio's current balances and then show a return % figure
+for the past 24 hours. For example, a user should be able to enter that their portfolio consists of 3 BTC, 20
+ETH, and 6 LTC. After pressing submit, the user should see an overall return percentage displayed for this
+portfolio over the past 24 hours (based on the performances of the individual assets over that period). See a
+basic mockup below:
+
+You will need to use the CoinCap API (https://github.com/CoinCapDev/CoinCap.io) to pull current and historical
+prices for cryptocurrencies. These prices will be used to compute the overall return % for portfolios that users
+submit. Note that for some of the more obscure cryptocurrencies, CoinCap has limited (or no) data – feel free
+to restrict your app to just the top 10 cryptocurrencies (a fixed list is fine).
+
+Tips
+• For current cryptocurrency prices, use /front; for historical (24h), use /history/1day/<coin>.
+Also, CoinCap’s data can be flaky at times so don’t worry about the final result being super accurate.
+• You’re free to use whichever tech stack you’re comfortable with to build this; we’re just trying to get a
+feel for how you write and architect your code, and aren’t testing for specific technologies.
+• Don’t worry about creating a “finished product”. Catching small edge cases and making optimizations
+is secondary to showing us your programming style. Perfectly clean code is also not necessary!
+• Use any online resources (StackOverflow, CodePen, etc.) you’d like.
+• We’re happy to answer any questions you have.
+• Feel free to be creative and show us your stuff if you’d like, but there’s definitely no need to go
+overboard. Don’t spend more than 2-4 hours on the overall project. Barebones is perfectly fine.
+Submission
+
+Please send over GitHub repo(s) for your code as well as a hosted version of your application for us to play
+around with (suggested: Heroku if you have backend code, otherwise GitHub pages). Good luck!
